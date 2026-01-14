@@ -5,3 +5,4 @@
 - add analytics to the admins dashboard
 - generate date in the backend
 - add scheduled posts feature
+- add comments

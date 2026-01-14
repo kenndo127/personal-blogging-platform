@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit</title>
+  <link rel="icon" type="image/x-icon" href="./assets/logo.png">
 </head>
 
   <!-- Bootstrap -->
@@ -22,10 +23,13 @@
 <!-- Side Nav -->
 <nav>
   <ul>
-    <a href="#"><li>Dashboard</li></a>
-    <a href="#"><li>Posts</li></a>
-    <a href="#"><li>Edit</li></a>
-    <a href="#"><li>Settings</li></a>
+    <a href="dashboard-menu.html"><li><img src="./assets/home-icon.svg" alt="home-icon"> Dashboard</li></a>
+
+    <a href="posts.html"><li><img src="./assets/add-post-icon.svg" alt="add-post-icon"> Add Posts</li></a>
+
+    <a href="edit.html"><li><img src="./assets/edit-icon.svg" alt="edit-icon"> Edit</li></a>
+
+    <a href="#"><li><img src="./assets/settings-icon.svg" alt="settings-icon"> Settings</li></a>
   </ul>
 </nav>
 
@@ -36,43 +40,37 @@
     <a href="#">Logout <img src="./assets/logout-icon.svg" alt="Log out Icon"></a>
   </div>
 
-
-  <!-- sn, title, date, search -->
-  <!-- table -->
   <div class="container table-container">
-
-  
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Title</th>
-      <th scope="col">Date</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
-    <tr>
-      <th scope="row">3</th>
-      <td>John</td>
-      <td>Doe</td>
-      <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
+        <tr>
+          <th scope="row">3</th>
+          <td>John</td>
+          <td>Doe</td>
+          <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </main>
   
 
