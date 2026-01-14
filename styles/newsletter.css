@@ -1,0 +1,100 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+.trending{
+  text-align: center;
+  padding: 5px;
+  background-color: #c1121f;
+}
+.trending a{
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+nav{
+  padding: 0 !important;
+  border-bottom: 1px solid #d1cece;
+}
+nav .navbar-brand img{
+  height: 50px;
+  width: 50px;
+}
+nav .navbar-nav li{
+  margin: 0 10px;
+}
+nav .search img{
+  margin-right: 20px;
+}
+nav .navbar-nav li:hover{
+    border-bottom: 2px solid #000;
+    transition: 0.1s;
+}
+/* for navbar */
+@media screen and (max-width: 992px) {
+  nav .search{
+    margin: 10px;
+  }
+  nav .navbar-nav li:hover{
+    border-bottom: 2px solid #000;
+    transition: 0.1s;
+    width: fit-content;
+  }
+}
+/* Newsletter section */
+.newsletter{
+  padding: 50px;
+  margin-top: 20px;
+}
+.newsletter h3{
+  text-align: center;
+  color: #c1121f;
+  font-weight: 700;
+  margin: 30px 0;
+}
+.newsletter form{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  margin-bottom: 50px;
+}
+.newsletter input{
+  padding: 10px;
+  width: 700px;
+  border: 1px solid #d1cece;
+}
+.newsletter button{
+  border: none;
+  border-radius: none !important;
+  background-color: #c1121f;
+  color: #fff;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 12px;
+}
+.newsletter input:focus{
+ outline: 1px solid #c1121f;
+}
+@media screen and (max-width: 992px) {
+  .newsletter input{
+    width: 100%;
+  }
+}
+/* footer section */
+footer{
+  background-color: #c1121f;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+footer p{
+  font-size: 12px;
+  margin: 0;
+}

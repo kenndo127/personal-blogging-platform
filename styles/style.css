@@ -1,0 +1,278 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+.trending{
+  text-align: center;
+  padding: 5px;
+  background-color: #c1121f;
+}
+.trending a{
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+nav{
+  padding: 0 !important;
+  border-bottom: 1px solid #d1cece;
+}
+nav .navbar-brand img{
+  height: 50px;
+  width: 50px;
+}
+nav .navbar-nav li{
+  margin: 0 10px;
+}
+nav .search img{
+  margin-right: 20px;
+}
+nav .navbar-nav li:hover{
+    border-bottom: 2px solid #000;
+}
+/* for navbar */
+@media screen and (max-width: 992px) {
+  nav .search{
+    margin: 10px;
+  }
+  nav .navbar-nav li:hover{
+    border-bottom: 2px solid #000;
+    width: fit-content;
+}
+}
+
+/* Hero section */
+/* ===== CAROUSEL ===== */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 450px; /* responsive height */
+  overflow: hidden;
+}
+
+/* ===== SLIDE WRAPPER ===== */
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+/* ===== SINGLE SLIDE ===== */
+.slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== OVERLAY ===== */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0)
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.overlay h2 {
+  color: #fff;
+  font-size: 4rem;
+}
+
+/* ===== ARROWS ===== */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 32px;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  user-select: none;
+  z-index: 10;
+}
+
+.arrow:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.prev {
+  left: 15px;
+}
+
+.next {
+  right: 15px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .carousel {
+    height: 50vh;
+  }
+
+  .overlay h2 {
+    font-size: 1.4rem;
+  }
+
+  .arrow {
+    font-size: 26px;
+    padding: 8px 12px;
+  }
+}
+
+/* Recent blog section */
+.recent-blogs{
+  margin: 0;
+  padding: 50px;
+}
+.recent-blogs h2{
+  text-align: center;
+  font-weight: 700;
+  margin: 40px 0;
+  color: #c1121f;
+}
+.recent-blogs .blog{
+  margin: 15px;
+}
+.recent-blogs .blog img{
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+.recent-blogs .blog span{
+  margin-left: 10px;
+  background-color: rgb(193, 18, 31, 0.1);
+  border-radius: 10px;
+  color: #c1121f;
+  font-size: 12px;
+  padding: 5px 20px;
+}
+.recent-blogs .blog a{
+  text-decoration: none;
+  color: #000;
+}
+.recent-blogs .blog h3{
+  margin: 10px;
+  margin-top: 15px;
+  font-size: 20px;
+}
+.recent-blogs .blog p{
+  font-size: 12px;
+  margin: 10px;
+}
+.recent-blogs .more-blogs{
+  text-decoration: none;
+  color: #c1121f;
+  text-align: center;
+  margin-top: 30px;
+}
+/* News Section */
+.news{
+  padding: 20px 0;
+}
+.news h1{
+  font-weight: 700;
+  font-size: 50px;
+  margin: 30px 0;
+}
+.news .news-elements{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.news .news-elements div{
+  display: flex;
+  justify-content: space-evenly;
+}
+.news .news-elements div p{
+  margin-right: 20px;
+}
+.news .news-elements div img{
+  margin-right: 5px;
+}
+.news .news-section img{
+  width: 100%;
+  height: 500px;
+}
+.news .news-section small{
+  display: block;
+  text-align: center;
+  margin: 10px;
+}
+.news .news-section p{
+  text-align: justify;
+}
+
+@media screen and (max-width: 992px) {
+  .news{
+    padding: 20px 30px;
+  }
+}
+/* Newsletter section */
+.newsletter{
+  box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.2);  
+  padding: 50px;
+  margin-top: 20px;
+}
+.newsletter h3{
+  text-align: center;
+  color: #c1121f;
+  font-weight: 700;
+  margin: 30px 0;
+}
+.newsletter form{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newsletter input{
+  padding: 10px;
+  width: 700px;
+  border: 1px solid #d1cece;
+}
+.newsletter button{
+  border: none;
+  border-radius: none !important;
+  background-color: #c1121f;
+  color: #fff;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 12px;
+}
+.newsletter input:focus{
+ outline: 1px solid #c1121f;
+}
+@media screen and (max-width: 992px) {
+  .newsletter input{
+    width: 100%;
+  }
+}
+/* footer section */
+footer{
+  background-color: #c1121f;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+footer p{
+  font-size: 12px;
+  margin: 0;
+}

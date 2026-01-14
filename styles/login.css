@@ -1,0 +1,81 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.login{
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+.login .container{
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.login .login-left{
+  background-image: url(./assets/login-background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.login .form-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 30px;
+}
+.login .form-section h1{
+  margin: 20px 0;
+}
+.login .form-check{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.login .form-check a{
+  text-decoration: none;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.login button {
+  width: 100%;
+  margin-top: 5px;
+  background-color: #57099a;
+  border: none;
+}
+.login .form-control:focus{
+  border-color: #57099a;
+  outline: 0; 
+  box-shadow: 0 0 0 4px rgba(119, 34, 190, 0.25);
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.login button:hover{
+  background-color: #7722be;
+  border: 1px solid #57099a;
+  color: #fff;
+}
+.login .form-check-input:checked {
+  background-color: #7722be;
+  border: 1px solid #57099a;
+}
+.login .form-check-input:focus{
+  border-color: #57099a;
+  outline: 0; 
+  box-shadow: 0 0 0 4px rgba(119, 34, 190, 0.25);
+}
+
+@media screen and (max-width: 760px) {
+  .login .login-left {
+    display: none;
+  }
+  .login .form-check a{
+    margin-left: 20px;
+  }
+}

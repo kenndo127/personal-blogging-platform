@@ -1,0 +1,7 @@
+- add a favicon to the title bar on the browser
+- add an active tab to show the current page you're on
+- come back and touch the search button
+- learn how to write my own hamburger after this project
+- add analytics to the admins dashboard
+- generate date in the backend
+- add scheduled posts feature

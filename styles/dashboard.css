@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body{
+  background: #f4f4f4;
+}
+nav{
+  width: 230px;
+  background-color: #002029;
+  height: 100%;
+  position: fixed;
+  padding: 20px 0;
+}
+nav ul {
+  padding: 0;
+}
+nav li{
+  list-style: none;
+  margin: 20px 0;
+  padding: 15px;
+}
+nav a{
+  text-decoration: none;
+  color: #00607a;
+  font-weight: bold;
+  width: 100%;
+}
+nav li:hover{
+  background-color: rgba(255, 255, 255, 0.1);
+}
+/* Main section */
+main{
+  margin-left: 230px;
+  padding-top: 20px;
+}
+main .main-nav{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  background-color: #fff;
+  margin: 0px 20px;
+  border-radius: 10px;
+}
+main .main-nav h2{
+  color: #002029;
+}
+main .main-nav a{
+  text-decoration: none;
+  color: #002029;
+  margin-top: 10px;
+}
+main .main-nav img{
+  margin-left: 5px;
+}
+
+main .stats{
+  margin: 20px 0;
+  padding: 20px;
+}
+main .stats .posts{
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+main .stats .posts img{
+  float: right;
+}
+
+main .stats .posts h3{
+  font-weight: 700;
+  margin-top: 10px;
+}
+main .stats .posts p{
+  color: #00607a;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+/* Styling the Post section */
+#editor{
+  height: 300px;
+  background-color: #fff;
+}
+.new-post{
+  margin: 20px 0;
+  padding: 5px;
+}
+.new-post label{
+  margin-left: 5px;
+}
+.new-post button{
+  margin: 10px 0;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #002029;
+  color: #f4f4f4;
+}
+.new-post button:hover{
+  background-color: #00607a;
+}
+
+/* Styling the edit section */
+.table-container{
+  padding: 20px;
+}
+.table{
+  margin: 20px 0;
+}
+.table button{
+  font-size: 12px;
+  margin-right: 10px;
+}
