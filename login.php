@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="styles/login.css">
 
 </head>
+
 <body>
 
   <div class="login">
@@ -25,7 +27,7 @@
 
         <!-- Form section -->
         <div class="col-lg-6 form-section">
-          <form>
+          <form method="post" action="login.php">
             <h1>Welcome Admin!</h1>
 
             <div class="mb-3">
@@ -45,16 +47,43 @@
               </div>
               <a href="#">Forgotten Password?</a>
             </div>
-            
+
             <button type="submit" class="btn btn-primary" name="login" value="login">Login</button>
           </form>
         </div>
 
+        <!-- Connecting to the backend -->
+        <?php
+        include("db_connect.php"); //connecting to the database
+
+        //getting value from the user
+        if(isset($_POST['login'])){
+
+          $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL); //validating email
+          if($email === false){
+            echo "
+              <div class='alert alert-danger' role='alert'>
+                  Enter a valid email or password!
+              </div> 
+            ";
+          }
+
+          $password = $_POST['password'];
+          $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+
+          echo $email, "<br>", $password;
+        }
+        
+        mysqli_close($connection); // disconnecting from the database
+        ?>
+
       </div>
     </div>
   </div>
-  
+
   <!-- javascript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
+
 </html>
