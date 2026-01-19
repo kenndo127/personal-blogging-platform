@@ -1,4 +1,4 @@
-- add a favicon to the title bar on the browser
+- add a favicon to the title bar on the browser (done)
 - add an active tab to show the current page you're on
 - come back and touch the search button
 - learn how to write my own hamburger after this project
@@ -6,3 +6,5 @@
 - generate date in the backend
 - add scheduled posts feature
 - add comments
+- add share to social media
+- add log admin out if active for over 8 hours

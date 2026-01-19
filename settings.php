@@ -50,7 +50,7 @@ require_once("admin-verify.php");
   <main>
     <div class="main-nav">
       <h2>Welcome Admin !</h2>
-      <a href="#">Logout <img src="./assets/logout-icon.svg" alt="Log out Icon"></a>
+      <a href="./logout.php">Logout <img src="./assets/logout-icon.svg" alt="Log out Icon"></a>
     </div>
 
     <div class="container mt-3">
