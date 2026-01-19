@@ -1,3 +1,7 @@
+<?php
+require_once("admin-verify.php");
+// this is used to make sure that the page is accessed only when the admin is logged in
+?>
 <!DOCTYPE html>
 <html lang="en">
 
