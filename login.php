@@ -1,3 +1,37 @@
+<?php 
+session_start(); //Track Login Sessions
+
+  include("db_connect.php"); //connecting to the database
+
+  //getting value from the user
+  if($_SERVER["REQUEST_METHOD"] == "POST"){ //instead of isset()
+
+    $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL); //validating email
+    if($email === false){
+      echo "
+        <div class='alert alert-danger' role='alert'>
+            Enter a valid email or password!
+        </div> 
+      ";
+    }
+
+    $password = $_POST['password']; //getting userpassword
+
+    $sql = "SELECT * FROM admin WHERE id = 1";
+    $result = mysqli_query($connection, $sql);
+
+    $row = mysqli_fetch_assoc($result);
+    if(($row['email'] === $email) && password_verify($password, $row['password'])){
+      $_SESSION['logged-in'] = true; // used to track if admin is logged in.
+      header("Location: ./dashboard-menu.php");
+      exit();
+    } else {
+      $error = "Invalid Login Details";
+    }
+  }
+  //mysqli_close($connection); // disconnecting from the database not needed because of exit()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +64,15 @@
           <form method="post" action="login.php">
             <h1>Welcome Admin!</h1>
 
+            <?php if(isset($error)){
+              echo "
+                <div class='alert alert-warning alert-dismissible fade show'  role='alert'>
+                  Invalid email or password!
+                    <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+                </div> ";
+            }
+            ?>
+
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
               <input type="email" id="email" name="email" class="form-control" required>
@@ -51,39 +94,6 @@
             <button type="submit" class="btn btn-primary" name="login" value="login">Login</button>
           </form>
         </div>
-
-        <!-- Connecting to the backend -->
-        <?php
-        include("db_connect.php"); //connecting to the database
-
-        //getting value from the user
-        if(isset($_POST['login'])){
-
-          $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL); //validating email
-          if($email === false){
-            echo "
-              <div class='alert alert-danger' role='alert'>
-                  Enter a valid email or password!
-              </div> 
-            ";
-          }
-
-          $password = $_POST['password'];
-
-          //next thing is to get info from database, compare it and route user to admin panel.
-          $sql = "SELECT * FROM admin WHERE id = 1";
-          $result = mysqli_query($connection, $sql);
-
-          $row = mysqli_fetch_assoc($result);
-          if(($row['email'] === $email) && password_verify($password, $row['password'])){
-            header("Location: ./dashboard-menu.php");
-            exit();
-          } else {
-            echo "------------------------------ cannot login";
-          }
-        }
-        mysqli_close($connection); // disconnecting from the database
-        ?>
 
       </div>
     </div>
