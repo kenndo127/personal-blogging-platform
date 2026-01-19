@@ -69,12 +69,19 @@
           }
 
           $password = $_POST['password'];
-          $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+          //next thing is to get info from database, compare it and route user to admin panel.
+          $sql = "SELECT * FROM admin WHERE id = 1";
+          $result = mysqli_query($connection, $sql);
 
-          echo $email, "<br>", $password;
+          $row = mysqli_fetch_assoc($result);
+          if(($row['email'] === $email) && password_verify($password, $row['password'])){
+            header("Location: ./dashboard-menu.php");
+            exit();
+          } else {
+            echo "------------------------------ cannot login";
+          }
         }
-        
         mysqli_close($connection); // disconnecting from the database
         ?>
 
