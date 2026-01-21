@@ -61,7 +61,7 @@ require_once("admin-verify.php");
     <div class="new-post">
       <div class="container">
 
-        <form id="postForm">
+        <form id="postForm" action="posts.php" method="post" enctype="multipart/form-data">
 
           <div class="mb-4">
             <label for="Blog Title" class="form-label">Title</label>
@@ -72,14 +72,14 @@ require_once("admin-verify.php");
             <div class="col-lg-6 col-sm-6">
               <div class="mb-4">
                 <label for="formFile" class="form-label">Upload your blog Image</label>
-                <input class="form-control" name="blog-img" type="file" id="formFile">
+                <input class="form-control" name="image" type="file" id="formFile">
               </div>
             </div>
 
             <div class="col-lg-6 col-sm-6">
               <div class="mb-4">
                 <label for="Image Source" class="form-label">Image Source</label>
-                <input type="text" class="form-control" id="image-source" name="title" placeholder="Enter your image source">
+                <input type="text" class="form-control" id="image-source" name="img-src" placeholder="Enter your image source">
               </div>
             </div>
           </div>
@@ -90,9 +90,71 @@ require_once("admin-verify.php");
           <!-- Hidden input that WILL be sent to backend -->
           <input type="hidden" name="content" id="content">
 
-          <button type="submit">Publish</button>
+          <button type="submit" name="publish">Publish</button>
 
         </form>
+        <?php
+          include("db_connect.php"); // connection file
+
+          if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+            //Get input from user
+            $title = $_POST['title'];
+            $img_src = $_POST['img-src'];
+            $content = $_POST['content'];
+
+            //Dealing with the images using the $_FILES superglobal variable
+            $file_name = $_FILES['image']['name']; // getting the filename
+            $file_name = str_replace(" ", "_", $file_name); // ensuring no whitespace is on image name;
+            $file_tmp_name = $_FILES['image']['tmp_name']; //temporary file storage
+            $file_destination = 'uploads/' . $file_name; //Creating image path
+
+            //Ensuring user uploads only Image and valid Image
+            if($_FILES['image']['error'] === 0){
+              $finfo = finfo_open(FILEINFO_MIME_TYPE); // verifies the file type
+              $mime_type = finfo_file($finfo, $file_tmp_name); // returns filetype if file is valid and false if invalid
+              
+              $file_types = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+
+              if(in_array($mime_type, $file_types)){
+                $image_info = getimagesize($file_tmp_name); // verifying if file is image
+
+                if($image_info !== false){
+                  // Image passed valid check, send to uploads
+                  move_uploaded_file($file_tmp_name, $file_destination);
+                } else{
+                  echo "problem"; // change to alert
+                }
+              } else {
+              echo "there was a problem in in uploading the files"; // change to alert later                
+              }
+            } else {
+              echo "there was a problem uploading the files"; // change to alert later
+            }
+
+            //Send details to database
+            $sql = "INSERT INTO posts (title, image, image_source, content) VALUES (?, ?, ?, ?)";
+
+            $stmt = mysqli_prepare($connection, $sql);
+            mysqli_stmt_bind_param(
+              $stmt,
+              "ssss",
+              $title,
+              $file_destination,
+              $img_src,
+              $content
+            );
+
+            $query = mysqli_stmt_execute($stmt);
+
+            if($query){
+              echo "<br> Successful Post";
+            } else {
+              echo "Unsuccessful post";
+            }
+          }
+
+        ?>
 
       </div>
     </div>
