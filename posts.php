@@ -1,6 +1,83 @@
 <?php
 require_once("admin-verify.php");
-// this is used to make sure that the page is accessed only when the admin is logged in
+
+include("db_connect.php"); 
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+  //Get input from user
+  $title = $_POST['title'];
+  $img_src = $_POST['img-src'];
+  $content = $_POST['content'];
+
+  //Dealing with the images
+  $file_name = $_FILES['image']['name']; 
+  $file_name = str_replace(" ", "_", $file_name);
+  $file_tmp_name = $_FILES['image']['tmp_name'];
+  $file_destination = 'uploads/' . $file_name; 
+
+  //Ensuring user uploads only valid Image
+  if($_FILES['image']['error'] === 0){
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime_type = finfo_file($finfo, $file_tmp_name);
+    
+    $file_types = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+
+    if(in_array($mime_type, $file_types)){
+      $image_info = getimagesize($file_tmp_name);
+
+      if($image_info !== false){
+        move_uploaded_file($file_tmp_name, $file_destination);
+      } else{
+        $image_error = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            You have successfully uploaded your post.
+          <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+        </div>";
+        die();
+      }
+    } else {
+        $image_error = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            You have successfully uploaded your post.
+          <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+        </div>";      
+        die();
+    }
+  } else {
+        $image_error = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            You have successfully uploaded your post.
+          <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+        </div>";
+        die();
+  }
+
+  //Send details to database
+  $sql = "INSERT INTO posts (title, image, image_source, content) VALUES (?, ?, ?, ?)";
+
+  $stmt = mysqli_prepare($connection, $sql);
+  mysqli_stmt_bind_param(
+    $stmt,
+    "ssss",
+    $title,
+    $file_destination,
+    $img_src,
+    $content
+  );
+
+  $query = mysqli_stmt_execute($stmt);
+
+  if($query){
+    $success = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+        You have successfully uploaded your post.
+      <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+    </div>";
+  } else {
+    $unsuccessful = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        You have successfully uploaded your post.
+      <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+    </div>";
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,6 +138,10 @@ require_once("admin-verify.php");
     <div class="new-post">
       <div class="container">
 
+      <?php if(isset($image_error)) echo $image_error; ?>
+      <?php if(isset($success)) echo $success; ?>
+      <?php if(isset($unsuccessful)) echo $unsuccessful; ?>
+
         <form id="postForm" action="posts.php" method="post" enctype="multipart/form-data">
 
           <div class="mb-4">
@@ -87,83 +168,14 @@ require_once("admin-verify.php");
           <!-- Quill editor -->
           <div id="editor"> </div>
 
-          <!-- Hidden input that WILL be sent to backend -->
+          <!-- Hidden input that will be sent to backend -->
           <input type="hidden" name="content" id="content">
 
           <button type="submit" name="publish">Publish</button>
 
         </form>
-        <?php
-          include("db_connect.php"); // connection file
-
-          if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-            //Get input from user
-            $title = $_POST['title'];
-            $img_src = $_POST['img-src'];
-            $content = $_POST['content'];
-
-            //Dealing with the images using the $_FILES superglobal variable
-            $file_name = $_FILES['image']['name']; // getting the filename
-            $file_name = str_replace(" ", "_", $file_name); // ensuring no whitespace is on image name;
-            $file_tmp_name = $_FILES['image']['tmp_name']; //temporary file storage
-            $file_destination = 'uploads/' . $file_name; //Creating image path
-
-            //Ensuring user uploads only Image and valid Image
-            if($_FILES['image']['error'] === 0){
-              $finfo = finfo_open(FILEINFO_MIME_TYPE); // verifies the file type
-              $mime_type = finfo_file($finfo, $file_tmp_name); // returns filetype if file is valid and false if invalid
-              
-              $file_types = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-
-              if(in_array($mime_type, $file_types)){
-                $image_info = getimagesize($file_tmp_name); // verifying if file is image
-
-                if($image_info !== false){
-                  // Image passed valid check, send to uploads
-                  move_uploaded_file($file_tmp_name, $file_destination);
-                } else{
-                  echo "problem";
-                  die("There is a problem"); // change to alert
-                }
-              } else {
-              echo "there was a problem in in uploading the files";
-              die(); // change to alert later                
-              }
-            } else {
-              echo "there was a problem uploading the files"; // change to alert later
-              die();
-            }
-
-            //Send details to database
-            $sql = "INSERT INTO posts (title, image, image_source, content) VALUES (?, ?, ?, ?)";
-
-            $stmt = mysqli_prepare($connection, $sql);
-            mysqli_stmt_bind_param(
-              $stmt,
-              "ssss",
-              $title,
-              $file_destination,
-              $img_src,
-              $content
-            );
-
-            $query = mysqli_stmt_execute($stmt);
-
-            if($query){
-              echo "<br> Successful Post";
-            } else {
-              echo "Unsuccessful post";
-            }
-          }
-
-        ?>
-
       </div>
     </div>
-
-
-
 
   </main>
 

@@ -29,7 +29,6 @@ session_start(); //Track Login Sessions
       $error = "Invalid Login Details";
     }
   }
-  //mysqli_close($connection); // disconnecting from the database not needed because of exit()
 ?>
 
 <!DOCTYPE html>
