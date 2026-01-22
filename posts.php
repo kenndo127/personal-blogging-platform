@@ -123,13 +123,16 @@ require_once("admin-verify.php");
                   // Image passed valid check, send to uploads
                   move_uploaded_file($file_tmp_name, $file_destination);
                 } else{
-                  echo "problem"; // change to alert
+                  echo "problem";
+                  die("There is a problem"); // change to alert
                 }
               } else {
-              echo "there was a problem in in uploading the files"; // change to alert later                
+              echo "there was a problem in in uploading the files";
+              die(); // change to alert later                
               }
             } else {
               echo "there was a problem uploading the files"; // change to alert later
+              die();
             }
 
             //Send details to database
