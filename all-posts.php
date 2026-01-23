@@ -1,7 +1,7 @@
 <?php
 require_once("admin-verify.php");
-// this is used to make sure that the page is accessed only when the admin is logged in
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,30 +57,38 @@ require_once("admin-verify.php");
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">ID</th>
             <th scope="col">Title</th>
             <th scope="col">Date</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td><button class="btn btn-primary">Update</button> <button class="btn btn-danger">Delete</button></td>
-          </tr>
+          <?php
+            include("db_connect.php");
+            //fetch rows from the database
+            //display the rows
+            //add the delete functionality with a confirmation button
+            //add the edit functionality
+
+            $sql = "SELECT * FROM posts";
+
+            $result = mysqli_query($connection, $sql);
+
+            if(mysqli_num_rows($result) > 0){
+              while($row = mysqli_fetch_assoc($result)){
+                echo "
+                  <tr>
+                    <td scope='row'>{$row['title']}</td>
+                    <td>{$row['date']}</td>
+                    <td><button class='btn btn-primary' type='submit' name='delete'>Update</button> <button class='btn btn-danger'>Delete</button></td>
+                  </tr>
+                ";
+              }
+            } else {
+              echo "<h1> No entries found! </h1>";
+            }
+          ?>
+          
         </tbody>
       </table>
     </div>
