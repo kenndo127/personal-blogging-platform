@@ -28,56 +28,52 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
       if($image_info !== false){
         move_uploaded_file($file_tmp_name, $file_destination);
+
+        //Send details to database
+        $sql = "INSERT INTO posts (title, image, image_source, content) VALUES (?, ?, ?, ?)";
+
+        $stmt = mysqli_prepare($connection, $sql);
+        mysqli_stmt_bind_param(
+          $stmt,
+          "ssss",
+          $title,
+          $file_destination,
+          $img_src,
+          $content
+        );
+
+        $query = mysqli_stmt_execute($stmt);
+
+        if($query){
+          $success = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+              You have successfully uploaded your post.
+            <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+          </div>";
+        } else {
+          $unsuccessful = "<div class='alert alert-error alert-dismissible fade show' role='alert'>
+              Could not upload post!
+            <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+          </div>";
+        }
       } else{
         $image_error = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            You have successfully uploaded your post.
+            Only Images are allowed!
           <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
         </div>";
-        die();
       }
     } else {
         $image_error = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            You have successfully uploaded your post.
+            Only Images are allowed!
           <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
         </div>";      
-        die();
     }
   } else {
         $image_error = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            You have successfully uploaded your post.
+            Only Images are allowed!
           <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
         </div>";
-        die();
-  }
-
-  //Send details to database
-  $sql = "INSERT INTO posts (title, image, image_source, content) VALUES (?, ?, ?, ?)";
-
-  $stmt = mysqli_prepare($connection, $sql);
-  mysqli_stmt_bind_param(
-    $stmt,
-    "ssss",
-    $title,
-    $file_destination,
-    $img_src,
-    $content
-  );
-
-  $query = mysqli_stmt_execute($stmt);
-
-  if($query){
-    $success = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-        You have successfully uploaded your post.
-      <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
-    </div>";
-  } else {
-    $unsuccessful = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-        You have successfully uploaded your post.
-      <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
-    </div>";
   }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
