@@ -80,7 +80,15 @@ require_once("admin-verify.php");
                   <tr>
                     <td scope='row'>{$row['title']}</td>
                     <td>{$row['date']}</td>
-                    <td><button class='btn btn-primary' type='submit' name='delete'>Update</button> <button class='btn btn-danger'>Delete</button></td>
+                    <td>
+                      <button class='btn btn-primary'>Update</button>
+                    
+                      <span><form action='delete.php' method='post'> 
+                        <input type='hidden' name='post_id' value='{$row['id']}'>
+                        <input type='hidden' name='image' value='{$row['image']}'>
+                        <button class='btn btn-danger' type='submit' value='delete'>Delete</button>
+                      </form></span>
+                    </td>
                   </tr>
                 ";
               }
