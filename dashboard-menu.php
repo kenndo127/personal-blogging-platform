@@ -36,7 +36,7 @@ require_once("admin-verify.php");
         <li><img src="./assets/add-post-icon.svg" alt="add-post-icon"> Add Posts</li>
       </a>
 
-      <a href="edit.php">
+      <a href="all-posts.php">
         <li><img src="./assets/edit-icon.svg" alt="edit-icon"> Edit</li>
       </a>
 
