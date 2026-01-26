@@ -109,9 +109,9 @@ require_once("admin-verify.php");
                   <tr>
                     <td scope='row'>{$row['title']}</td>
                     <td>{$row['date']}</td>
-                    <td>
-                      <button class='btn btn-primary'>Update</button>
-                    
+                    <td style='display: flex'>
+                      <button class='btn btn-primary' type='submit'><a href='edit.php?id={$row['id']}' style='color: #fff; text-decoration: none;'>Edit</a></button>
+
                       <form action='all-posts.php' method='post'> 
                         <input type='hidden' name='post_id' value='{$row['id']}'>
                         <input type='hidden' name='image' value='{$row['image']}'>
@@ -120,8 +120,8 @@ require_once("admin-verify.php");
                         <!-- Modal -->
                         <div class='modal fade' id='deleteModal' tabindex='-1' aria-labelledby='deleteModalLabel' aria-hidden='true'>
                           <div class='modal-dialog modal-dialog-centered modal-sm'>
-                            <div class='modal-content'>
-                              <div class='modal-body'>
+                            <div class='modal-content bg-dark'>
+                              <div class='modal-body' style='color: #fff'>
                                 Are you sure you want to delete this post?
                               </div>
                               <div class='modal-footer'>
@@ -131,10 +131,8 @@ require_once("admin-verify.php");
                             </div>
                           </div>
                         </div>
-                  
                       </form>
-
-
+                      
                     </td>
                   </tr>
                 ";
