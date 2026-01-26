@@ -64,11 +64,40 @@ require_once("admin-verify.php");
         </thead>
         <tbody>
           <?php
+            //This is the page deletion logic
             include("db_connect.php");
-            //fetch rows from the database
-            //display the rows
-            //add the delete functionality with a confirmation button
-            //add the edit functionality
+            if($_SERVER["REQUEST_METHOD"] === "POST"){
+              $post_id = $_POST['post_id'];
+              $image = $_POST['image'];
+
+              $sql = "DELETE FROM posts WHERE id = ?";
+              $stmt = mysqli_prepare($connection, $sql);
+              mysqli_stmt_bind_param($stmt, "i", $post_id);
+              $status = mysqli_stmt_execute($stmt);
+
+              $alert = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                      Deletion Successful.
+                    <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+                  </div>";
+
+              if($status){
+                if(!(file_exists($image))){ 
+                  echo $alert;
+                }else{
+                  unlink($image); //deleting image from directory
+                  echo $alert;
+                }
+              } else {
+                echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    Error deleting the post.
+                  <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+                </div>";
+              }
+            }
+          ?>
+
+          <?php
+            include("db_connect.php");
 
             $sql = "SELECT * FROM posts";
 
@@ -83,11 +112,29 @@ require_once("admin-verify.php");
                     <td>
                       <button class='btn btn-primary'>Update</button>
                     
-                      <span><form action='delete.php' method='post'> 
+                      <form action='all-posts.php' method='post'> 
                         <input type='hidden' name='post_id' value='{$row['id']}'>
                         <input type='hidden' name='image' value='{$row['image']}'>
-                        <button class='btn btn-danger' type='submit' value='delete'>Delete</button>
-                      </form></span>
+                        <button class='btn btn-danger' type='button' value='delete' data-bs-toggle='modal' data-bs-target='#deleteModal'>Delete</button>
+
+                        <!-- Modal -->
+                        <div class='modal fade' id='deleteModal' tabindex='-1' aria-labelledby='deleteModalLabel' aria-hidden='true'>
+                          <div class='modal-dialog modal-dialog-centered modal-sm'>
+                            <div class='modal-content'>
+                              <div class='modal-body'>
+                                Are you sure you want to delete this post?
+                              </div>
+                              <div class='modal-footer'>
+                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                <button type='submit' class='btn btn-danger'>Yes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  
+                      </form>
+
+
                     </td>
                   </tr>
                 ";
