@@ -1,6 +1,9 @@
 <?php
 require_once("admin-verify.php");
 // this is used to make sure that the page is accessed only when the admin is logged in
+
+include("./db_connect.php");
+$total_rows = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM posts"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +63,7 @@ require_once("admin-verify.php");
           <div class="col-lg-4 col-sm-6">
             <div class="posts">
               <img src="./assets/feed-counter.svg" alt="feed-counter Icon">
-              <h3>30</h3>
+              <h3><?php echo $total_rows ?></h3>
               <p>Number of Blogs</p>
             </div>
           </div>
