@@ -67,7 +67,7 @@
             <div class='slide'>
               <img src='{$row['image']}' alt='Slide Image 1'>
               <div class='overlay'>
-                <h2>{$row['title']}</h2>
+                <a href = 'news.php?id={$row['id']}' style='text-decoration: none'><h2>{$row['title']}</h2></a>
               </div>
             </div>
           ";

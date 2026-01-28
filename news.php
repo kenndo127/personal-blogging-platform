@@ -1,3 +1,18 @@
+<?php
+  if (!(isset($_GET['id'])) || !(is_numeric($_GET['id']))) {
+    header("Location: index.php");
+    exit();
+  }
+  include("./db_connect.php");
+  $post_id = (int) $_GET['id'];
+
+  $sql = "SELECT * FROM posts WHERE id = ?";
+  $stmt = mysqli_prepare($connection, $sql);
+  mysqli_stmt_bind_param($stmt, "i", $post_id);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  $row = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +38,6 @@
 <body>
 
   <!-- Navbar Section -->
-  <div class="trending"><a href="#">This is the latest trending news</a></div>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php"><img src="./assets/logo.png" alt="Logo"></a>
@@ -57,25 +71,25 @@
     <div class="container">
       <div class="row">
 
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam commodi perspiciatis libero dicta veritatis consectetur necessitatibus fuga..</h1>
+        <h1><?php echo $row['title'] ?></h1>
         <hr>
         <div class="news-elements">
           <p>By Okechukwu Kenneth</p>
           <div>
-            <p><img src="./assets/calendar.svg" alt="Calendar icon">10th January, 2024</p>
-            <p><img src="./assets/time.svg" alt="time icon">10 mins read</p>
+            <p><img src="./assets/time.svg" alt="time icon">
+              <?php
+                $read_time = ceil(str_word_count(strip_tags($row['content']))/200);
+                echo $read_time . " mins read";
+              ?>
+            </p>
+            <p><img src="./assets/calendar.svg" alt="Calendar icon"><?php echo substr($row['date'], 0, 11) ?></p>
           </div>
         </div>
 
         <div class="news-section">
-          <img src="./assets/news-img.jpg" class="img-fluid" alt="News Image">
-          <small class="img-source">This is the image source</small>
-
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus expedita, quasi enim ab vero quisquam architecto odit id dicta repellendus omnis totam commodi eius ea! Animi illo eius iure cum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam veritatis cum labore, id aliquam molestiae maxime nulla, ipsam, voluptas quia hic sint placeat repellendus commodi velit autem modi deleniti eveniet. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur, harum autem consectetur quaerat dolores beatae sequi reiciendis accusamus voluptatibus doloribus, doloremque unde eius nobis ratione perspiciatis vero quam sunt fugit!</p>
-
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, accusantium! Eum corrupti, alias saepe magni delectus illo, culpa similique iusto natus perferendis eius sint, non quis sunt! Vitae, nemo pariatur? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod perferendis illum molestias impedit. Sit aspernatur nobis, sint fugiat labore blanditiis distinctio in omnis alias. Veniam perspiciatis illo ex necessitatibus blanditiis.</p>
-
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis cumque aspernatur quis repudiandae quia minima ducimus saepe, aliquid provident nemo corrupti laborum veritatis libero beatae asperiores dolorum dolore. Amet, inventore. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias cum cumque beatae ipsa doloribus quo recusandae vero. Vero facilis ullam nobis, aliquid hic mollitia in qui ut maiores similique odio. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum reiciendis fugiat deserunt nisi quia odit tempora quam consequuntur, alias, hic dolorem rem quidem autem. Temporibus non eius error vel perspiciatis.</p>
+          <img src="<?php echo $row['image'] ?>" class="img-fluid" alt="News Image">
+          <small class="img-source"><?php echo $row['image_source'] ?></small>
+          <?php echo $row['content'] ?>
         </div>
 
       </div>
