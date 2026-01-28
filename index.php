@@ -55,28 +55,24 @@
   <div class="carousel">
 
     <div class="slides">
+      <?php
+        include("./db_connect.php");
+        $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 3";
+        $stmt = mysqli_prepare($connection, $sql);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
-      <div class="slide">
-        <img src="./assets/carousel-img1.jpg" alt="Slide Image 1">
-        <div class="overlay">
-          <h2>How Technology Is Shaping the Future</h2>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img src="./assets/carousel-img2.jpg" alt="Slide Image 2">
-        <div class="overlay">
-          <h2>The Beauty of Nature and Quiet Living</h2>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img src="./assets/carousel-img3.jpg" alt="Slide Image 3">
-        <div class="overlay">
-          <h2>Simple Habits That Improve Daily Life</h2>
-        </div>
-      </div>
-
+        while($row = mysqli_fetch_assoc($result)){
+          echo "
+            <div class='slide'>
+              <img src='{$row['image']}' alt='Slide Image 1'>
+              <div class='overlay'>
+                <h2>{$row['title']}</h2>
+              </div>
+            </div>
+          ";
+        }
+      ?>
     </div>
 
     <div class="arrow prev">&#10094;</div>
