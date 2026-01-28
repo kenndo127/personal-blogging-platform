@@ -54,6 +54,15 @@ require_once("admin-verify.php");
     </div>
 
     <div class="container table-container">
+      <?php
+        if(isset($_SESSION['update-success']) && isset($_SESSION['update-success']) == true){
+          echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                        Update Successful.
+                      <div type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></div>
+                    </div>";
+        }
+        unset($_SESSION['update-success']);
+      ?>
       <table class="table">
         <thead>
           <tr>

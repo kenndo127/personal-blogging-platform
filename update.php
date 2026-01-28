@@ -44,7 +44,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   mysqli_stmt_bind_param($stmt, "ssssi", $title, $file_destination, $img_src, $content, $post_id);
 
   if(mysqli_stmt_execute($stmt)){
+    session_start(); // used to create a success alert after updating
+    $_SESSION['update-success'] = true;
     header("Location: all-posts.php");
+    exit();
   }else {
     echo "Couldn't  update blog";
   }
