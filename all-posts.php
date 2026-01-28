@@ -110,7 +110,7 @@ require_once("admin-verify.php");
                     <td scope='row'>{$row['title']}</td>
                     <td>{$row['date']}</td>
                     <td style='display: flex'>
-                      <button class='btn btn-primary' type='submit'><a href='edit.php?id={$row['id']}' style='color: #fff; text-decoration: none;'>Edit</a></button>
+                      <button class='btn btn-primary'><a href='edit.php?id={$row['id']}' style='color: #fff; text-decoration: none;'>Edit</a></button>
 
                       <form action='all-posts.php' method='post'> 
                         <input type='hidden' name='post_id' value='{$row['id']}'>
