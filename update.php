@@ -5,6 +5,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   include("./db_connect.php");
   $post_id = $_POST['id'];
   $title = $_POST['title'];
+  $slug = create_slug($title);
   $img_src = $_POST['img-src'];
   $content = $_POST['content'];
 
@@ -39,9 +40,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
   }
 
-  $sql = "UPDATE posts SET title = ?, image = ?, image_source = ?, content = ? WHERE id = ?";
+  $sql = "UPDATE posts SET title = ?, slug = ?, image = ?, image_source = ?, content = ? WHERE id = ?";
   $stmt = mysqli_prepare($connection, $sql);
-  mysqli_stmt_bind_param($stmt, "ssssi", $title, $file_destination, $img_src, $content, $post_id);
+  mysqli_stmt_bind_param($stmt, "sssssi", $title, $slug, $file_destination, $img_src, $content, $post_id);
 
   if(mysqli_stmt_execute($stmt)){
     session_start(); // used to create a success alert after updating

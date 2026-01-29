@@ -7,6 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   //Get input from user
   $title = $_POST['title'];
+  $slug = create_slug($title);
   $img_src = $_POST['img-src'];
   $content = $_POST['content'];
 
@@ -30,13 +31,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         move_uploaded_file($file_tmp_name, $file_destination);
 
         //Send details to database
-        $sql = "INSERT INTO posts (title, image, image_source, content) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO posts (title, slug, image, image_source, content) VALUES (?, ?, ?, ?, ?)";
 
         $stmt = mysqli_prepare($connection, $sql);
         mysqli_stmt_bind_param(
           $stmt,
-          "ssss",
+          "sssss",
           $title,
+          $slug,
           $file_destination,
           $img_src,
           $content

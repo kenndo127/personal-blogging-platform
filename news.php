@@ -1,14 +1,14 @@
 <?php
-  if (!(isset($_GET['id'])) || !(is_numeric($_GET['id']))) {
+  if (!(isset($_GET['title']))) {
     header("Location: index.php");
     exit();
   }
   include("./db_connect.php");
-  $post_id = (int) $_GET['id'];
+  $slug = $_GET['title']; 
 
-  $sql = "SELECT * FROM posts WHERE id = ?";
+  $sql = "SELECT * FROM posts WHERE slug = ?";
   $stmt = mysqli_prepare($connection, $sql);
-  mysqli_stmt_bind_param($stmt, "i", $post_id);
+  mysqli_stmt_bind_param($stmt, "s", $slug);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   $row = mysqli_fetch_assoc($result);

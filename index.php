@@ -56,7 +56,7 @@
 
     <div class="slides">
       <?php
-        include("./db_connect.php");
+        include_once("./db_connect.php");
         $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 3";
         $stmt = mysqli_prepare($connection, $sql);
         mysqli_stmt_execute($stmt);
@@ -67,7 +67,7 @@
             <div class='slide'>
               <img src='{$row['image']}' alt='Slide Image 1'>
               <div class='overlay'>
-                <a href = 'news.php?id={$row['id']}' style='text-decoration: none'><h2>{$row['title']}</h2></a>
+                <a href = 'news.php?title={$row['slug']}' style='text-decoration: none'><h2>{$row['title']}</h2></a>
               </div>
             </div>
           ";
@@ -86,35 +86,29 @@
       <div class="row">
 
         <h2>Blogs</h2>
+        <?php
+          include_once("./db_connect.php");
 
-        <div class="col-lg-4 col-sm-6">
-          <div class="blog">
-            <img src="./assets/carousel-img1.jpg" class="img-fluid" alt="Blog Image">
-            <span>10 mins read</span>
-            <h3><a href="#">This is a blog title</a></h3>
-            <p>By Okechukwu Kenneth</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-sm-6">
-          <div class="blog">
-            <img src="./assets/carousel-img1.jpg" class="img-fluid" alt="Blog Image">
-            <span>10 mins read</span>
-            <h3><a href="#">This is a blog title</a></h3>
-            <p>By Okechukwu Kenneth</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-sm-6">
-          <div class="blog">
-            <img src="./assets/carousel-img1.jpg" class="img-fluid" alt="Blog Image">
-            <span>10 mins read</span>
-            <h3><a href="#">This is a blog title</a></h3>
-            <p>By Okechukwu Kenneth</p>
-          </div>
-        </div>
-
-        <a href="#" class="more-blogs">See More</a>
+          $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 3 OFFSET 3";
+          $stmt = mysqli_prepare($connection, $sql);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+          
+          while($row = mysqli_fetch_assoc($result)){
+            $read_time = ceil(str_word_count(strip_tags($row['content']))/200);
+            echo "
+              <div class='col-lg-4 col-sm-6'>
+                <div class='blog'>
+                  <img src='{$row['image']}' class='img-fluid' alt='Blog Image'>
+                  <span>{$read_time} mins read</span>
+                  <h3><a href='news.php?title={$row['slug']}'>{$row['title']}</a></h3>
+                  <p>By Okechukwu Kenneth</p>
+                </div>
+              </div>
+            ";
+          }
+        ?>
+        <a href="blog.php" class="more-blogs">See More</a>
 
       </div>
     </div>

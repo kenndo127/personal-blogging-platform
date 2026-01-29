@@ -58,33 +58,28 @@
 
         <h2>Blogs</h2>
 
-        <div class="col-lg-4 col-sm-6">
-          <div class="blog">
-            <img src="./assets/carousel-img1.jpg" class="img-fluid" alt="Blog Image">
-            <span>10 mins read</span>
-            <h3><a href="#">This is a blog title</a></h3>
-            <p>By Okechukwu Kenneth</p>
-          </div>
-        </div>
+        <?php
+          include_once("./db_connect.php");
 
-        <div class="col-lg-4 col-sm-6">
-          <div class="blog">
-            <img src="./assets/carousel-img1.jpg" class="img-fluid" alt="Blog Image">
-            <span>10 mins read</span>
-            <h3><a href="#">This is a blog title</a></h3>
-            <p>By Okechukwu Kenneth</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-sm-6">
-          <div class="blog">
-            <img src="./assets/carousel-img1.jpg" class="img-fluid" alt="Blog Image">
-            <span>10 mins read</span>
-            <h3><a href="#">This is a blog title</a></h3>
-            <p>By Okechukwu Kenneth</p>
-          </div>
-        </div>
-
+          $sql = "SELECT * FROM posts ORDER BY id DESC";
+          $stmt = mysqli_prepare($connection, $sql);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+          
+          while($row = mysqli_fetch_assoc($result)){
+            $read_time = ceil(str_word_count(strip_tags($row['content']))/200);
+            echo "
+              <div class='col-lg-4 col-sm-6'>
+                <div class='blog'>
+                  <img src='{$row['image']}' class='img-fluid' alt='Blog Image'>
+                  <span>{$read_time} mins read</span>
+                  <h3><a href='news.php?title={$row['slug']}'>{$row['title']}</a></h3>
+                  <p>By Okechukwu Kenneth</p>
+                </div>
+              </div>
+            ";
+          }
+        ?>
       </div>
     </div>
   </div>

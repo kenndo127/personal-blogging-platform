@@ -74,7 +74,7 @@ require_once("admin-verify.php");
         <tbody>
           <?php
             //This is the page deletion logic
-            include("db_connect.php");
+            include_once("db_connect.php");
             if($_SERVER["REQUEST_METHOD"] === "POST"){
               $post_id = $_POST['post_id'];
               $image = $_POST['image'];
@@ -106,7 +106,7 @@ require_once("admin-verify.php");
           ?>
 
           <?php
-            include("db_connect.php");
+            include_once("db_connect.php");
 
             $sql = "SELECT * FROM posts";
 
