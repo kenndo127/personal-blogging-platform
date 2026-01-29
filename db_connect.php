@@ -12,14 +12,3 @@ try {
 } catch (mysqli_sql_exception) {
   echo "Could not connect to " . $db_name;
 }
-
-//global function
-function create_slug($string) {
-    // 1. Lowercase the string
-    $slug = strtolower($string);
-    // 2. Replace any non-alphanumeric characters with a hyphen
-    $slug = preg_replace('/[^a-z0-9-]+/', '-', $slug);
-    // 3. Remove multiple hyphens in a row and trim from ends
-    $slug = preg_replace('/-+/', '-', $slug);
-    return trim($slug, '-');
-}

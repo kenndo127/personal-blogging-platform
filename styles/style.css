@@ -222,6 +222,31 @@ nav .navbar-nav li:hover{
     padding: 20px 30px;
   }
 }
+/* Social Media Share */
+.share {
+  margin-top: 20px;
+}
+.share p{
+  display: flex;
+  flex-direction: row;
+  color: #c1121f;
+}
+.share p:before, .share p:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid #c1121f;
+  margin: auto;
+}
+.share .social img{
+  height: 50px;
+  width: 50px;
+  margin: 0px 10px;
+}
+.share .social{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 /* Newsletter section */
 .newsletter{
   box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.2);  

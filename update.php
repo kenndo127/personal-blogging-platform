@@ -3,6 +3,8 @@ require_once("admin-verify.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   include("./db_connect.php");
+  include("functions.php");
+  
   $post_id = $_POST['id'];
   $title = $_POST['title'];
   $slug = create_slug($title);

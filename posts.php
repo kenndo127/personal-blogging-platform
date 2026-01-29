@@ -1,7 +1,8 @@
 <?php
 require_once("admin-verify.php");
 
-include("db_connect.php"); 
+include("db_connect.php");
+include("functions.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 

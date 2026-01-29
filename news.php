@@ -3,7 +3,10 @@
     header("Location: index.php");
     exit();
   }
+
   include("./db_connect.php");
+  include_once("functions.php");
+
   $slug = $_GET['title']; 
 
   $sql = "SELECT * FROM posts WHERE slug = ?";
@@ -12,11 +15,24 @@
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   $row = mysqli_fetch_assoc($result);
+
+  //Handling Social Media Sharing
+  $raw_page_url = get_url();
+  $encoded_page_url = urlencode(get_url());
+  $domain_url = get_domain_url($row['image']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <!-- For Sharing Purposes -->
+  <meta property="og:title" content="<?php echo $row['title'] ?>">
+  <meta property="og:image" content="<?php echo $domain_url ?>">
+  <meta property="og:url" content="<?php echo $raw_page_url; ?>">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>News</title>
@@ -90,6 +106,16 @@
           <img src="<?php echo $row['image'] ?>" class="img-fluid" alt="News Image">
           <small class="img-source"><?php echo $row['image_source'] ?></small>
           <?php echo $row['content'] ?>
+        </div>
+
+        <div class="share">
+          <p> Share Via Social Media </p>
+          <div class="social">
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo $encoded_page_url ?>" target="_blank"><img src="./assets/linkedin-svgrepo-com.svg"></a>
+            <a href="https://api.whatsapp.com/send?text=<?php echo $encoded_page_url ?>" target="_blank"><img src="./assets/whatsapp-color-svgrepo-com.svg"></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $encoded_page_url ?>" target="_blank"><img src="./assets/facebook-1-svgrepo-com.svg"></a>
+            <a href="https://x.com/intent/tweet?url=<?php echo $encoded_page_url ?>" target="_blank"><img src="./assets/icons8-x-50.png"></a>
+          </div>
         </div>
 
       </div>
