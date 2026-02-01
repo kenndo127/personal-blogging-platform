@@ -19,7 +19,7 @@
         <h2>Blogs</h2>
 
         <?php
-          include_once("./db_connect.php");
+          include_once("./includes/db_connect.php");
 
           $sql = "SELECT * FROM posts ORDER BY id DESC";
           $stmt = mysqli_prepare($connection, $sql);

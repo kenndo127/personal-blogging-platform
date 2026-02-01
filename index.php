@@ -16,7 +16,7 @@
 
     <div class="slides">
       <?php
-        include_once("./db_connect.php");
+        include_once("./includes/db_connect.php");
         $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 3";
         $stmt = mysqli_prepare($connection, $sql);
         mysqli_stmt_execute($stmt);
@@ -47,7 +47,7 @@
 
         <h2>Blogs</h2>
         <?php
-          include_once("./db_connect.php");
+          include_once("./includes/db_connect.php");
 
           $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 3 OFFSET 3";
           $stmt = mysqli_prepare($connection, $sql);
@@ -79,7 +79,7 @@
     <div class="container">
       <div class="row">
         <h3>Subscribe to my Newsletter</h3>
-        <form>
+        <form action="newsletter-processor.php" method="post">
           <div>
             <input type="email" name="newsletter-email" placeholder="example@email.com">
           </div>

@@ -4,7 +4,7 @@
     exit();
   }
 
-  include("./db_connect.php");
+  include("./includes/db_connect.php");
   include_once("functions.php");
 
   $slug = $_GET['title']; 
@@ -122,31 +122,8 @@
     </div>
   </main>
 
-  <!-- Newsletter Section -->
-  <div class="newsletter">
-    <div class="container">
-      <div class="row">
-        <h3>Subscribe to my Newsletter</h3>
-        <form>
-          <div>
-            <input type="email" name="newsletter-email" placeholder="example@email.com">
-          </div>
-          <div>
-            <button type="submit" name="subscribe">Subscribe</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- Footer Goes Here -->
+  <?php include("./includes/footer.php"); ?>
 
-
-  <!-- Footer Section -->
-  <footer>
-    <p>&copy; Okechukwu Kenneth Chidiebube 2026 </p>
-  </footer>
-
-  <!-- Js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
-
 </html>
