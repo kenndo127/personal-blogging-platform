@@ -2,8 +2,8 @@
 require_once("admin-verify.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-  include("./db_connect.php");
-  include("functions.php");
+  include("./incudes/db_connect.php");
+  include("./includes/functions.php");
   
   $post_id = $_POST['id'];
   $title = $_POST['title'];

@@ -5,7 +5,7 @@ if (!(isset($_GET['id'])) || !(is_numeric($_GET['id']))) {
   header("Location: all-posts.php");
   exit();
 }
-include("./db_connect.php");
+include("./includes/db_connect.php");
 $post_id = (int) $_GET['id'];
 
 $sql = "SELECT * FROM posts WHERE id = ?";

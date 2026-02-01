@@ -1,7 +1,7 @@
 <?php 
 session_start(); //Track Login Sessions
 
-  include("db_connect.php"); //connecting to the database
+  include("./includes/db_connect.php"); //connecting to the database
 
   //getting value from the user
   if($_SERVER["REQUEST_METHOD"] == "POST"){ //instead of isset()

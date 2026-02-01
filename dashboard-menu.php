@@ -2,7 +2,7 @@
 require_once("admin-verify.php");
 // this is used to make sure that the page is accessed only when the admin is logged in
 
-include("./db_connect.php");
+include("./includes/db_connect.php");
 $total_rows = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM posts"));
 ?>
 <!DOCTYPE html>
