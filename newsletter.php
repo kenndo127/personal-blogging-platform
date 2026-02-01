@@ -16,7 +16,7 @@
     <div class="container">
       <div class="row">
         <h3>Subscribe to my Newsletter</h3>
-        <form>
+        <form action="" method="post">
           <div>
             <input type="email" name="newsletter-email" placeholder="example@email.com">
           </div>
