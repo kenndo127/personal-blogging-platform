@@ -2,7 +2,7 @@
 require_once("admin-verify.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-  include("./incudes/db_connect.php");
+  include("./includes/db_connect.php");
   include("./includes/functions.php");
   
   $post_id = $_POST['id'];
@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     header("Location: all-posts.php");
     exit();
   }else {
-    echo "Couldn't  update blog";
+    echo "Couldn't update blog";
   }
 }
 ?>
