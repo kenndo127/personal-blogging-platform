@@ -16,9 +16,12 @@ session_start(); //Track Login Sessions
     }
 
     $password = $_POST['password']; //getting userpassword
-
-    $sql = "SELECT * FROM admin WHERE id = 1";
-    $result = mysqli_query($connection, $sql);
+    $id = 1;
+    $sql = "SELECT * FROM admin WHERE id = ?";
+    $stmt = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     $row = mysqli_fetch_assoc($result);
     if(($row['email'] === $email) && password_verify($password, $row['password'])){
