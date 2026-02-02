@@ -316,6 +316,9 @@ nav .navbar-nav li:hover{
   background-color: #c1121f;
   color: #fff;
 }
+.search-page h4{
+  margin-top: 20px;
+}
 @media screen and (max-width: 992px) {
   .search-page .search-input{
     width: 100%;
