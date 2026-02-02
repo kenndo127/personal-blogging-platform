@@ -8,7 +8,6 @@ $newsletter_rows = mysqli_num_rows(mysqli_query($connection, "SELECT * FROM subs
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <!-- Header Goes Here -->
 <?php include("./includes/admin-header.php") ?>
 

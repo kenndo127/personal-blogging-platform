@@ -35,6 +35,34 @@ nav img{
 nav li:hover{
   background-color: rgba(255, 255, 255, 0.1);
 }
+/* Hamburger Section */
+.navigation{
+  width: 230px;
+  background-color: #002029;
+  position: absolute;
+  z-index: 1;
+  padding: 20px 0;
+}
+.navigation ul {
+  padding: 0;
+}
+.navigation li{
+  list-style: none;
+  margin: 20px 0;
+  padding: 20px;
+}
+.navigation a{
+  text-decoration: none;
+  color: #f4f4f4;
+  font-weight: bold;
+  width: 100%;
+}
+.navigation img{
+  margin-right: 5px;
+}
+.navigation li:hover{
+  background-color: rgba(255, 255, 255, 0.1);
+}
 /* Main section */
 main{
   margin-left: 230px;
@@ -119,4 +147,34 @@ main .stats .posts p{
 .table button{
   font-size: 12px;
   margin-right: 10px;
+}
+/* for collapsed navbar */
+.menu-icon, .hamburger-menu{
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  nav{
+    display: none;
+  }
+  main{
+    margin-left: 0;
+  }
+  .menu-icon, .hamburger-menu{
+    display: revert;
+  }
+  .menu-icon{
+    display: flex;
+    margin: 10px;
+  }
+  .menu-icon button{
+    background-color: #002029;
+    border: none;
+    color: #fff;
+  }
+  .menu-icon button:hover{
+    background-color: #00607a;
+    border: none;
+    color: #fff;
+  }
+  
 }
