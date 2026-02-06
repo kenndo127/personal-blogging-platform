@@ -14,7 +14,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   //Dealing with the images
   $file_name = $_FILES['image']['name']; 
-  $file_name = str_replace(" ", "_", $file_name);
+  $file_name = str_replace([" ", "'", '"', '&', '(', ')'], "_", $file_name);
+  //$file_name = str_replace(" ", "_", $file_name);
   $file_tmp_name = $_FILES['image']['tmp_name'];
   $file_destination = 'uploads/' . $file_name; 
 
